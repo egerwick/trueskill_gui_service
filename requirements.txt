@@ -6,4 +6,5 @@ whitenoise==2.0.6
 requests==2.9.1
 djangorestframework==3.4.7
 trueskill==0.4.4
+altgraph==0.7.2 
 bonjour-py==0.3
