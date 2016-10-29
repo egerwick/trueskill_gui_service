@@ -38,7 +38,9 @@
                 "legacyid": "56fa4076e07b02a903a61374",
                 "registrationDate": "2016-03-29T08:44:38.000Z",
                 "updatedAt": "2016-09-29T08:25:20.000Z",
-                "deletedAt": null
+                "deletedAt": null,
+                "mu": 25.0,
+                "sigma": 8.33333333
             }
         },
         "team1def": {
@@ -68,7 +70,9 @@
                 "legacyid": "56fa4124e07b02a903a61386",
                 "registrationDate": "2016-03-29T08:47:32.000Z",
                 "updatedAt": "2016-09-29T08:25:20.000Z",
-                "deletedAt": null
+                "deletedAt": null,
+                "mu": 25.0,
+                "sigma": 8.33333333
             }
         },
         "team2of": {
@@ -98,7 +102,9 @@
                 "legacyid": "56fa40d3e07b02a903a6137d",
                 "registrationDate": "2016-03-29T08:46:11.000Z",
                 "updatedAt": "2016-09-29T08:25:20.000Z",
-                "deletedAt": null
+                "deletedAt": null,
+                "mu": 25.0,
+                "sigma": 8.33333333
             }
         },
         "team2def": {
@@ -128,7 +134,9 @@
                 "legacyid": "56fa3fb5e07b02a903a61365",
                 "registrationDate": "2016-03-29T08:41:25.000Z",
                 "updatedAt": "2016-09-29T08:25:20.000Z",
-                "deletedAt": null
+                "deletedAt": null,
+                "mu": 25.0,
+                "sigma": 8.33333333
             }
         },
         "submittedBy": null

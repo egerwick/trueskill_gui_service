@@ -1,9 +1,9 @@
 import json
 
-def extract():
+def extract(game):
     games = []
-    with open('./hello/trueskill/test_data.json') as data_file:
-        data = json.load(data_file)
+    tgame = json.loads(game)
+    data = tgame
     i = 0
     for item in data:
         goals = [None] * 8
@@ -37,7 +37,15 @@ def extract():
                 item.get('team2def').get('goals'),
                 item.get('team2of').get('goals'),
                 item.get('timestamp'),
-                item.get('crawling')
+                item.get('crawling'),
+                str(item.get('team1def').get('player').get('mu')),
+                str(item.get('team1of').get('player').get('mu')),
+                str(item.get('team2def').get('player').get('mu')),
+                str(item.get('team2of').get('player').get('mu')),
+                str(item.get('team1def').get('player').get('sigma')),
+                str(item.get('team1of').get('player').get('sigma')),
+                str(item.get('team2def').get('player').get('sigma')),
+                str(item.get('team2of').get('player').get('sigma')),
             ]
         else:
             current_game = [
@@ -50,7 +58,15 @@ def extract():
                 item.get('team1def').get('goals'),
                 item.get('team1of').get('goals'),
                 item.get('timestamp'),
-                item.get('crawling')
+                item.get('crawling'),
+                str(item.get('team2def').get('player').get('mu')),
+                str(item.get('team2of').get('player').get('mu')),
+                str(item.get('team1def').get('player').get('mu')),
+                str(item.get('team1of').get('player').get('mu')),
+                str(item.get('team2def').get('player').get('sigma')),
+                str(item.get('team2of').get('player').get('sigma')),
+                str(item.get('team1def').get('player').get('sigma')),
+                str(item.get('team1of').get('player').get('sigma')),
             ]
         games.append(current_game)
     return games

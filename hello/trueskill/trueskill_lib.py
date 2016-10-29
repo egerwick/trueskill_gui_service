@@ -11,7 +11,7 @@ class player(object):
     def __init__(self, name, position, rating):
         self.name = name
         self.position = position
-        self.rating = Rating(rating)
+        self.rating = TrueSkill.create_rating(mu = 25.0, sigma = 8.33333) 
         self.rating_history = []
         self.skill = player_skill(self)
         self.goals = 0
@@ -49,13 +49,13 @@ def player_skill(p):
 #----------------------------------------------
 
 
-def add_or_find_player(listn, name, pos, av_rating):
+def add_or_find_player(listn, name, pos, add_mu, add_sigma):
     index_player = 0
     for items in listn:
         index_player = index_player + 1
         if(name == items.name and pos == items.position):
             return index_player - 1
-    listn.append(player(name, pos, av_rating))
+    listn.append(player(name, pos, add_mu))
     return index_player
 
 
@@ -73,7 +73,6 @@ def get_players_instances(f_game, f_list_players, av_rating, player_combination=
     # if players don't exist, create new instance
     # if combination p1 and p2 are set then games
     # with this combination are given own instance
-    # Make new game instances for matching players
     num = 0
     ip = []
     for name in f_game:
@@ -82,7 +81,7 @@ def get_players_instances(f_game, f_list_players, av_rating, player_combination=
         else:
             position = 'offense'
         ip.append(add_or_find_player(
-            f_list_players, name, position, av_rating))
+            f_list_players, name, position, 25, 8.33333))
         num = num + 1
     return ip
 
@@ -160,7 +159,7 @@ def games_in_trueskill(f_games, f_mu, f_tau, track_mu_over_time, player_combinat
     env.make_as_global()
     average_rating = 25
     game_number = 0
-    last_game_day = f_games[0][8]
+    #last_game_day = f_games[0][8]
     for game in f_games:
         game_number = game_number + 1
         list(game)
@@ -168,7 +167,7 @@ def games_in_trueskill(f_games, f_mu, f_tau, track_mu_over_time, player_combinat
             game_day = game[8]
             if game_day[0:10] != last_game_day[0:10]:
                 record_skill_over_time(list_players, last_game_day)
-                last_game_day = game_day
+                #last_game_day = game_day
         ip = get_players_instances(
             game, list_players, average_rating, player_combination)
         game_in_trueskill(list_players[ip[0]], list_players[
@@ -205,7 +204,7 @@ def player_ranking_to_json(f_list_players, f_min_number_games, track_mu_over_tim
                 p_tmp['skillhistory'] = players.rating_history
             data.append(p_tmp)
     encode_json(data)
-
+    return data
 
 def output_player_results(f_list_players, f_min_number_games):
     print 'Trueskill Rating Algorithm -----------------------------------'
