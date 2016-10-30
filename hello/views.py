@@ -10,7 +10,7 @@ from models import Game, GamePerformance, Player
 from serializers import GameSerializer, GamePerformanceSerializer, PlayerSerializer
 from rest_framework import generics
 from django.utils.six import BytesIO
-from trueskill.single_game_ranking import apply_trueskill
+from trueskill.one_game_update import apply_trueskill
 from rest_framework.renderers import JSONRenderer
 # Create your views here.
 
@@ -47,3 +47,11 @@ class GameList(APIView):
 class GameDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Game.objects.all()
     serializer_class = GameSerializer
+
+def db(request):
+    greeting = Greeting()
+    greeting.save()
+
+    greetings = Greeting.objects.all()
+
+    return render(request, 'db.html', {'greetings': greetings})

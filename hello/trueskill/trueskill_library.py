@@ -34,10 +34,8 @@ def flatten(x):
     return result
 
 
-def extract():
-    with open('test_data.json') as data_file:
-        data = json.load(data_file)
-    #data = json.loads(game)
+def extract(game):
+    data = json.loads(game)
     i = 0
     positions = ['team1def','team1of','team2def','team2of']
     games = []
