@@ -2,16 +2,13 @@ import requests
 import os
 from django.shortcuts import render
 from django.http import HttpResponse
-from rest_framework import viewsets
-from rest_framework import status
+from rest_framework import viewsets, status, generics
 from rest_framework.decorators import api_view
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import viewsets
 from models import Game, GamePerformance, Player
 from serializers import GameSerializer, GamePerformanceSerializer, PlayerSerializer
-from rest_framework import generics
 from django.utils.six import BytesIO
 from trueskill.one_game_update import apply_trueskill
 from rest_framework.renderers import JSONRenderer

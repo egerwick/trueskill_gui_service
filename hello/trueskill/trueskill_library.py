@@ -78,7 +78,7 @@ def player_ranking_to_json(rankings):
     for p in rankings:
         p_tmp = {"id": p.pid, "nickname": p.nickname, "mu": p.rating.mu, "sigma": p.rating.sigma }
         tmp_data.append(p_tmp)
-    return json.dumps(tmp_data)
+    return tmp_data
 
 
 
