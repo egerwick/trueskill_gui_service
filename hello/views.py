@@ -36,12 +36,12 @@ class GameList(APIView):
     def post(self, request, format=None):
         serializer = GameSerializer(data=request.data, many=True)
         if serializer.is_valid():
-            #serializer.save()
-            #get the new trueskill rating here and return
-            #the player instances          
-            json = JSONRenderer().render(serializer.data)
-            new_game = apply_trueskill(json)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            #Note that they are not saved to the DB, merely 
+            #send through the rating function
+            #new_rating includes new mu and sigma for all of the players
+            game_in_json = JSONRenderer().render(serializer.data)
+            new_rating = apply_trueskill(game_in_json)
+            return Response(new_rating, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class GameDetail(generics.RetrieveUpdateDestroyAPIView):

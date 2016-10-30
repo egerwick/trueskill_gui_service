@@ -4,14 +4,14 @@ from rest_framework import serializers
 class PlayerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Player
-        fields = ('nickname', 'mu', 'sigma')
+        fields = ('id', 'nickname', 'mu', 'sigma')
 
 class GamePerformanceSerializer(serializers.ModelSerializer):
     player = PlayerSerializer()
     
     class Meta:
         model = GamePerformance
-        fields = ('goals','owngoals','playerposition','winner','player') 
+        fields = ('goals','owngoals','playerposition','winner','player','crawling') 
 
 class GameSerializer(serializers.ModelSerializer):
     team1of = GamePerformanceSerializer()
