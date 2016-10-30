@@ -3,7 +3,6 @@ from django.db import models
 # Create your models here.
 
 class Player(models.Model):
-    id = models.IntegerField()
     nickname = models.CharField(max_length=100, blank=True, default='')
     mu = models.FloatField(default = 25.0)
     sigma = models.FloatField(default = 8.33333)
