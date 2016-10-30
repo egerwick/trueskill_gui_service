@@ -1,6 +1,5 @@
 import requests
 import os
-<<<<<<< HEAD
 import trueskill
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -8,8 +7,6 @@ from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from serializers import UserSerializer, GroupSerializer
 from .models import Greeting
-
-=======
 from rest_framework import status
 from rest_framework.decorators import api_view
 from django.http import Http404
@@ -22,7 +19,7 @@ from rest_framework import generics
 from django.utils.six import BytesIO
 from trueskill.one_game_update import apply_trueskill
 from rest_framework.renderers import JSONRenderer
->>>>>>> single_game_service
+
 # Create your views here.
 
 class GameViewSet(viewsets.ModelViewSet):
