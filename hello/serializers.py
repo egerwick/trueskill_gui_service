@@ -1,14 +1,24 @@
-from django.contrib.auth.models import User, Group
+from hello.models import Game, GamePerformance, Player
 from rest_framework import serializers
 
-
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class PlayerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ('url', 'username', 'email', 'groups')
+        model = Player
+        fields = ('id', 'nickname', 'mu', 'sigma')
 
-
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
+class GamePerformanceSerializer(serializers.ModelSerializer):
+    player = PlayerSerializer()
+    
     class Meta:
-        model = Group
-        fields = ('url', 'name')
+        model = GamePerformance
+        fields = ('goals','owngoals','playerposition','winner','player','crawling') 
+
+class GameSerializer(serializers.ModelSerializer):
+    team1of = GamePerformanceSerializer()
+    team1def = GamePerformanceSerializer()
+    team2of = GamePerformanceSerializer()
+    team2def = GamePerformanceSerializer()
+
+    class Meta:
+        model = Game
+        fields = ('created','timestamp','team1of','team1def','team2of','team2def')
