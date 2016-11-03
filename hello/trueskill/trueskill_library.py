@@ -42,17 +42,16 @@ def extract(game):
     for item in data:
         game_rep = []
         for position in positions:
-            d_tmp = item.get(position).get('player').get('id')
+            id_tmp = item.get(position).get('player').get('id')
             nickname_tmp = item.get(position).get('player').get('nickname')
             playerposition_tmp = item.get(position).get('playerposition')
             mu_tmp = item.get(position).get('player').get('mu')
             sigma_tmp = item.get(position).get('player').get('sigma')
             rating_tmp = TrueSkill(mu=mu_tmp, sigma=sigma_tmp)
             rating_tmp.create_rating()
-            p_tmp = Player(nickname_tmp,playerposition_tmp,25,d_tmp)
+            p_tmp = Player(nickname_tmp,playerposition_tmp,25,id_tmp)
             p_tmp.rating = rating_tmp
             p_tmp.winner_flag = item.get(position).get('winner')
-            p_tmp.pid = d_tmp
             game_rep.append(p_tmp)
         games.append(game_rep)
     return games     
@@ -65,6 +64,7 @@ def game_in_trueskill(game):
     LosR = [Losers[0].rating,Losers[1].rating]
     (Winners[0].rating, Winners[1].rating), (Losers[0].rating,Losers[1].rating) = rate([WinR,LosR],ranks=[0, 1])
     return [Winners,Losers]
+
 
 def games_in_trueskill(games):
     results = []

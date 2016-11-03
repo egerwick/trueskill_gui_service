@@ -40,8 +40,8 @@ class GameList(APIView):
             #Note that they are not saved to the DB, merely 
             #send through the rating function
             #new_rating includes new mu and sigma for all of the players
-            game_in_json = JSONRenderer().render(serializer.data)
-            new_rating = apply_trueskill(game_in_json)
+            gamejson = JSONRenderer().render(serializer.data)
+            new_rating = get_rating(gamejson)
             return Response(new_rating, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
