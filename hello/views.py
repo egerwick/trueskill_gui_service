@@ -10,6 +10,7 @@ from rest_framework.response import Response
 from models import Game, GamePerformance, Player
 from serializers import GameSerializer, GamePerformanceSerializer, PlayerSerializer
 from django.utils.six import BytesIO
+from trueskill.one_game_update import get_rating
 from rest_framework.renderers import JSONRenderer
 
 # Create your views here.
