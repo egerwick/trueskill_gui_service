@@ -27,3 +27,14 @@ with appropriate test_data.json file
 If a new user identity is needed then 
 
 heroku run python manage.py createsuperuser
+	
+
+
+Run the App locally
+
+heroku local
+
+and then consume service
+
+curl -H "Content-Type: application/json" -X POST -d @test_data.json http://localhost:5000 -u user:password123	
+
