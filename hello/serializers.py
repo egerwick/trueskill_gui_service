@@ -1,4 +1,4 @@
-from hello.models import Game, GamePerformance, Player
+from hello.models import Game, GamePerformance, Player, RatingList
 from rest_framework import serializers
 
 class PlayerSerializer(serializers.ModelSerializer):
@@ -22,3 +22,10 @@ class GameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Game
         fields = ('created','timestamp','team1of','team1def','team2of','team2def')
+
+class RatingListSerializer(serializers.ModelSerializer):
+    players = PlayerSerializer()
+
+    class Meta:
+        model = RatingList
+        fields = ('timestamp')

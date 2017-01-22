@@ -26,3 +26,7 @@ class Game(models.Model):
     team1def = models.OneToOneField(GamePerformance, related_name = "team1def_per", null=True)
     team2of = models.OneToOneField(GamePerformance, related_name = "team2of_per", null=True)
     team2def = models.OneToOneField(GamePerformance, related_name = "team2def_per", null=True)
+
+class RatingList(models.Model):
+    players = models.ForeignKey(Player)
+    timestamp = models.CharField(max_length=100, blank=True, default='')

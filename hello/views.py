@@ -7,8 +7,8 @@ from rest_framework.decorators import api_view
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from models import Game, GamePerformance, Player, Greeting
-from serializers import GameSerializer, GamePerformanceSerializer, PlayerSerializer
+from models import Game, GamePerformance, Player, Greeting, RatingList
+from serializers import GameSerializer, GamePerformanceSerializer, PlayerSerializer, RatingListSerializer
 from django.utils.six import BytesIO
 from trueskill.one_game_update import get_rating
 from rest_framework.renderers import JSONRenderer
@@ -24,6 +24,10 @@ class GameViewSet(viewsets.ModelViewSet):
 
     def pre_save(self, obj):
         obj.owner = self.request.user
+
+class GameDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Game.objects.all()
+    serializer_class = GameSerializer
 
 class GameList(APIView):
     """
@@ -44,10 +48,6 @@ class GameList(APIView):
             new_rating = get_rating(gamejson)
             return Response(new_rating, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-class GameDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Game.objects.all()
-    serializer_class = GameSerializer
 
 def db(request):
     greeting = Greeting()
