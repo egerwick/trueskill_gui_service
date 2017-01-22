@@ -18,6 +18,7 @@ router = routers.DefaultRouter()
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     url(r'^', include(router.urls)),
+    url(r'^db', hello.views.db, name='db'),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^games/$', hello.views.GameList.as_view()),
     url(r'^games/(?P<pk>[0-9]+)/$', hello.views.GameDetail.as_view()),
