@@ -24,7 +24,7 @@ class GameList(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        serializer = GameSerializer(data=request.data, many=True)
+        serializer = GameSerializer(data=request.data, many=True, read_only=True)
         if serializer.is_valid():
             #Note that they are not saved to the DB, merely 
             #send through the rating function
