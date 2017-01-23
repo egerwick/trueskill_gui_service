@@ -24,7 +24,7 @@ class GameList(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        serializer = GameSerializer(data=request.data, many=True, read_only=True)
+        serializer = GameSerializer(data=request.data, many=True)
         if serializer.is_valid():
             gamejson = JSONRenderer().render(serializer.data)
             new_rating = get_rating(gamejson)
