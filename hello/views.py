@@ -14,21 +14,6 @@ from trueskill.one_game_update import get_rating
 from rest_framework.renderers import JSONRenderer
 
 # Create your views here.
-
-class GameViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-    queryset = Game.objects.all()
-    serializer_class = GameSerializer
-
-    def pre_save(self, obj):
-        obj.owner = self.request.user
-
-class GameDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Game.objects.all()
-    serializer_class = GameSerializer
-
 class GameList(APIView):
     """
     List all snippets, or create a new snippet.
