@@ -31,7 +31,7 @@ class GameList(APIView):
             #new_rating includes new mu and sigma for all of the players
             gamejson = JSONRenderer().render(serializer.data)
             new_rating = get_rating(gamejson)
-            serializer.save()
+            #serializer.save()
             return Response(new_rating, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
