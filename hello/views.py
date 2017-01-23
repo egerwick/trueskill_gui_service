@@ -26,9 +26,6 @@ class GameList(APIView):
     def post(self, request, format=None):
         serializer = GameSerializer(data=request.data, many=True, read_only=True)
         if serializer.is_valid():
-            #Note that they are not saved to the DB, merely 
-            #send through the rating function
-            #new_rating includes new mu and sigma for all of the players
             gamejson = JSONRenderer().render(serializer.data)
             new_rating = get_rating(gamejson)
             return Response(new_rating, status=status.HTTP_201_CREATED)
