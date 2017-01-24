@@ -38,6 +38,11 @@ class RatingList(APIView):
     def post(self, request, format=None):
         pass
 
+def rating(request):
+    greeting = Greeting()
+    greeting.save()
+    greetings = Greeting.objects.all()
+    return render(request, 'db.html', {'greetings': greetings})
 
 def db(request):
     greeting = Greeting()

@@ -12,7 +12,7 @@ class GamePerformanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = GamePerformance
         fields = ('goals','owngoals','playerposition','winner','player','crawling') 
-
+    
 class GameSerializer(serializers.ModelSerializer):
     team1of = GamePerformanceSerializer()
     team1def = GamePerformanceSerializer()
