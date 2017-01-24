@@ -9,4 +9,4 @@ def get_rating():
     track_mu_over_time = False
     list_players = games_in_trueskill(games, f_mu, f_tau, track_mu_over_time, 0	)
     min_number_games = 20
-    return player_ranking_to_json(list_players, min_number_games)
+    return player_ranking_to_json(list_players,min_number_games)

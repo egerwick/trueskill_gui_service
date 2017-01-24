@@ -224,10 +224,10 @@ def player_ranking_to_json(f_list_players, f_min_number_games):
     total_games = 0
     tmp_data = []
     f_list_players.sort(key=lambda player: player.rating.mu, reverse=True)
-    for players in f_list_players:
-        total_games = total_games + float(players.ngame)
-        if(players.ngame > f_min_number_games):
-            p_tmp = {"nickname": p.nickname, "mu": p.rating.mu, "sigma": p.rating.sigma, "winnerPercentage": float(players.won) / float(players.ngame)}
+    for p in f_list_players:
+        total_games = total_games + float(p.ngame)
+        if(p.ngame > f_min_number_games):
+            p_tmp = {"nickname": p.name, "mu": p.rating.mu, "sigma": p.rating.sigma, "winnerPercentage": float(p.won) / float(p.ngame)}
             tmp_data.append(p_tmp)
     return tmp_data
     
