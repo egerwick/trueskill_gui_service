@@ -58,5 +58,4 @@ def db(request):
     #get all of the games
     #update the ratings
     #display the rating list
-
     return render(request, 'db.html', {'greetings': greetings})
