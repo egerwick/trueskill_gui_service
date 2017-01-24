@@ -3,7 +3,7 @@ import json
 
 def extract():
     games = []
-    with open('all_games.json') as data_file:
+    with open('./all_games.json') as data_file:
         data = json.load(data_file)
 
     for item in data:
