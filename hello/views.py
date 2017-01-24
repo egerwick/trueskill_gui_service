@@ -42,4 +42,8 @@ def db(request):
     greeting = Greeting()
     greeting.save()
     greetings = Greeting.objects.all()
+    #get all of the games
+    #update the ratings
+    #display the rating list
+
     return render(request, 'db.html', {'greetings': greetings})

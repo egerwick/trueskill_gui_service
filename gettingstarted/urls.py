@@ -19,7 +19,6 @@ router = routers.DefaultRouter()
 urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^db', hello.views.db, name='db'),
-    url(r'^ratings', hello.views.db, name='ratings'),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^games/$', hello.views.GameList.as_view()),
 ]
