@@ -46,8 +46,7 @@ class GameList(APIView):
 
 class RatingList(APIView):
     def get(self, request, format=None):
-       #new_rating = get_rating(gamejson)
-        new_rating = {"lala":1234}
+        new_rating = get_rating(gamejson)
         return Response(new_rating)
 
 def db(request):
