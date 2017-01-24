@@ -14,6 +14,19 @@ from trueskill.one_game_update import get_rating
 from rest_framework.renderers import JSONRenderer
 
 # Create your views here.
+class PlayerList(APIView):
+    def get(self, request, format=None):
+        player = Player.objects.all()
+        serializer = PlayerSerializer(player, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = PlayerSerializer(data=request.data, many=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data(), status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 class GameList(APIView):
     """
     List all snippets, or create a new snippet.
