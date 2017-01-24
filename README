@@ -38,3 +38,5 @@ and then consume service
 
 curl -H "Content-Type: application/json" -X POST -d @test_data.json http://localhost:5000 -u user:password123	
 
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET https://trueskill-service.herokuapp.com/players/?format=json -u trueskilluser:password123
