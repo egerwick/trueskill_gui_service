@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^games/$', hello.views.GameList.as_view()),
     url(r'^players/$', hello.views.PlayerList.as_view())
+    url(r'^players/(?P<pk>[\d]+)/$', hello.views.PlayerView.as_view(), name='player-instance'),
 ]
