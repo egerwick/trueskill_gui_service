@@ -46,15 +46,8 @@ class GameList(APIView):
 
 class RatingList(APIView):
     def get(self, request, format=None):
-        #scrape the entire json file from Kickerlytics
-        #scraped_games = scrape_games()
-        #all_ratings = games_in_trueskill(scraped_games)
-        all_games = 1
-        all_ratings = 1
-        return Response(all_ratings)
-
-    def post(self, request, format=None):
-        pass
+        new_rating = get_rating(gamejson)
+        return Response(new_rating)
 
 def db(request):
     greeting = Greeting()
