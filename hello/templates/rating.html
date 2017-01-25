@@ -14,6 +14,30 @@
     <li>{{ item.nickname }}</li>
 {% endfor %}
 
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Sigma</th>
+        <th>Mu</th>
+        <th>Winning Percentage</th>
+        <th>Goal Average</th>
+    </tr>
+    {% for item in players %}
+    <tr> 
+        <td>{{ item.nickname }}</td>
+        <td>{{ item.position }}</td>
+        <td>{{ item.sigma }}</td>
+        <td>{{ item.mu }}</td>
+        <td>{{ item.winnerPercentage }}</td>
+        <td>{{ item.goalAverage }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+
 </ul>
 
 </div>
