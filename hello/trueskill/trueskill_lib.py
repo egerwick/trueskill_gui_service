@@ -192,34 +192,6 @@ def print_games(f_games, name1=None, name2=None):
 def encode_json(data):
     print json.dumps(data)
 
-
-def player_ranking_to_json(f_list_players, f_min_number_games, track_mu_over_time):
-    total_games = 0
-    data = []
-    f_list_players.sort(key=lambda player: player.rating.mu, reverse=True)
-    for players in f_list_players:
-        total_games = total_games + float(players.ngame)
-        if(players.ngame > f_min_number_games):
-            p_tmp = {"id": int(players.name), "position": players.position, "crawl": players.crawl, "winPercent": float(players.won) / float(players.ngame),
-                     "aveGoals": float(players.goals) / float(players.ngame), "mu": players.rating.mu, "sigma": players.rating.sigma, "skill": players.skill}
-            if track_mu_over_time:
-                p_tmp['skill history'] = players.rating_history
-            data.append(p_tmp)
-    encode_json(data)
-
-
-def output_player_results(f_list_players, f_min_number_games):
-    print 'Trueskill Rating Algorithm -----------------------------------'
-    print
-    total_games = 0
-    f_list_players.sort(key=lambda player: player.rating.mu, reverse=True)
-    for players in f_list_players:
-        total_games = total_games + float(players.ngame)
-        if(players.ngame > f_min_number_games):
-            print players.name,players.position,float(players.goals) / float(players.ngame),float(players.won) / float(players.ngame),players.rating.sigma,players.rating.mu
-    print
-    print total_games / 4
-
 def player_ranking_to_json(f_list_players, f_min_number_games):
     total_games = 0
     tmp_data = []
@@ -227,21 +199,6 @@ def player_ranking_to_json(f_list_players, f_min_number_games):
     for p in f_list_players:
         total_games = total_games + float(p.ngame)
         if(p.ngame > f_min_number_games):
-            p_tmp = {"nickname": p.name, "mu": p.rating.mu, "sigma": p.rating.sigma, "winnerPercentage": float(p.won) / float(p.ngame)}
+            p_tmp = {"name": p.name,"position": p.position ,"mu": p.rating.mu, "sigma": p.rating.sigma, "winnerPercentage": float(p.won) / float(p.ngame), "goalAverage":float(players.goals) / float(players.ngame)}
             tmp_data.append(p_tmp)
     return tmp_data
-    
-def print_game_results(f_game_number, f_game, p1=None, p2=None):
-    print_game = 0
-    if p1 == None and p2 == None:
-        print_game = 1
-    if p1 == None and p2 != None:
-        if (p2 == f_game[1] or p2 == f_game[3]):
-            print_game = 1
-    if p1 != None and p2 == None:
-        if (p1 == f_game[0] or p1 == f_game[2]):
-            print_game = 1
-    if (p1 == f_game[0] and p2 == f_game[1]) or (p1 == f_game[2] and p2 == f_game[3]):
-        print_game = 1
-    if print_game == 1:
-        print f_game_number, "Winner:", f_game[0], f_game[4], f_game[1], f_game[5], "Loser: ", f_game[2], f_game[6], f_game[3], f_game[7], "Sub-Date: ", f_game[8]
