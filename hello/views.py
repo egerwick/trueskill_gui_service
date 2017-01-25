@@ -11,6 +11,7 @@ from models import Game, GamePerformance, Player, Greeting, RatingList
 from serializers import GameSerializer, GamePerformanceSerializer, PlayerSerializer, RatingListSerializer
 from django.utils.six import BytesIO
 from trueskill.one_game_update import get_rating
+from trueskill.efficient_scraping import scrape_games
 from rest_framework.renderers import JSONRenderer
 
 # Create your views here.
@@ -46,6 +47,7 @@ class GameList(APIView):
 
 class RatingList(APIView):
     def get(self, request, format=None):
+        scrape_games()
         new_rating = get_rating()
         return Response(new_rating)
 

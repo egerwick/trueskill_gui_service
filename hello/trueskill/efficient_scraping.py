@@ -5,4 +5,6 @@ def scrape_games():
     req = urllib2.Request(url)
     response = urllib2.urlopen(req)
     the_page = response.read()
-    return the_page
+    with open('/app/hello/trueskill/all_games.json','w') as file_:
+        file_.write(the_page)
+    return
