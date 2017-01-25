@@ -11,8 +11,8 @@ class Player(models.Model):
     position = models.CharField(max_length=100, blank=True, default='')
     mu = models.FloatField(default = 25.0)
     sigma = models.FloatField(default = 8.33333)
-    winnerPercentage = models.FloatField(defaul = 0)
-    goalAverage = models.FloatField(defaul = 0)
+    winnerPercentage = models.FloatField(default = 0)
+    goalAverage = models.FloatField(default = 0)
 
 class GamePerformance(models.Model):
     goals = models.IntegerField(default = 0)
