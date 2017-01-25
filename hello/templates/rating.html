@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+  <div class="container">
+
+
+<h2>Overall Rankings</h2>
+
+
+<ul>
+
+{% for rating in new_rating %}
+    <li>{{ rating }}</li>
+{% endfor %}
+
+</ul>
+
+</div>
+
+{% endblock %}
