@@ -10,26 +10,10 @@
 
 <ul>
 
-<table>
-  <tr>
-        <th>Name</th>
-        <th>Postion</th>
-        <th>Mu</th>
-        <th>Sigma</th>
-        <th>Win Percentage</th>
-        <th>Goal Percentage</th>
-  </tr>
-  {% for item in new_rating %}
-  <tr> 
-        <td>{{ item["name"] }}</td>
-        <td>{{ item["position"] }}</td>
-        <td>{{ item["mu"] }}</td>
-        <td>{{ item["sigma"] }}</td>
-        <td>{{ item["winnerPercentage"] }}</td>
-        <td>{{ item["goalAverage"] }}</td>
-  </tr>
-  {% endfor %}
-<table>
+{% for item in new_rating %}
+    <li>{{ item }}</li>
+{% endfor %}
+
 </ul>
 
 </div>
