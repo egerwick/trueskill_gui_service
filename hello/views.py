@@ -49,8 +49,17 @@ class RatingList(APIView):
     def get(self, request, format=None):
         scrape_games()
         new_rating = get_rating()
-        return render(request, 'rating.html', {'new_rating': new_rating})
-        #return Response(new_rating)
+        players = []
+        for player in new_rating:
+            ptmp = Player()
+            ptmp.nickname = player['name']
+            ptmp.position = player['position']
+            ptmp.mu = player['mu']
+            ptmp.sigma = player['sigma']
+            ptmp.winnerPercentage = player["winnerPercentage"]
+            ptmp.goalAverage = player["goalAverage"]
+            players.append(ptmp)
+        return render(request, 'rating.html', {'players': players})
 
 def db(request):
     greeting = Greeting()
