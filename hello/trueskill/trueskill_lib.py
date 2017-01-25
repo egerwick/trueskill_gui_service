@@ -199,6 +199,6 @@ def player_ranking_to_json(f_list_players, f_min_number_games):
     for p in f_list_players:
         total_games = total_games + float(p.ngame)
         if(p.ngame > f_min_number_games):
-            p_tmp = {"name": p.name,"position": p.position ,"mu": p.rating.mu, "sigma": p.rating.sigma, "winnerPercentage": float(p.won) / float(p.ngame), "goalAverage":float(p.goals) / float(p.ngame)}
+            p_tmp = {"name": p.name.encode('utf-8'),"position": p.position ,"mu": p.rating.mu, "sigma": p.rating.sigma, "winnerPercentage": float(p.won) / float(p.ngame), "goalAverage":float(p.goals) / float(p.ngame)}
             tmp_data.append(p_tmp)
     return tmp_data
