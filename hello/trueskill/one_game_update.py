@@ -9,6 +9,7 @@ def get_rating(last_month_flag = False):
     if last_month_flag:
         games = get_this_months_games(games)
         min_number_games = 0
+    games = []
     f_mu = 25.0
     f_tau = 2*0.083333
     track_mu_over_time = False
