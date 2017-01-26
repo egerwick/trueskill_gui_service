@@ -1,4 +1,4 @@
-from hello.models import Game, GamePerformance, Player, RatingList
+from hello.models import Game, GamePerformance, Player, RatingList, LastMonthRatingList
 from rest_framework import serializers
 
 class PlayerSerializer(serializers.ModelSerializer):
