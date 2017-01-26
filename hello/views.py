@@ -75,7 +75,7 @@ class LastMonthRatingList(APIView):
             ptmp.winnerPercentage = player["winnerPercentage"]
             ptmp.goalAverage = player["goalAverage"]
             players.append(ptmp)
-        return render(request, 'rating.html', {'players': players})
+        return render(request, 'ratingMonth.html', {'players': players})
 
 def db(request):
     greeting = Greeting()

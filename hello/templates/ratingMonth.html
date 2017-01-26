@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'my-listing.css' %}" />
+
+
+{% block content %}
+  <div class="container">
+
+
+<h2>Ranking for this month only</h2>
+
+
+<ul>
+
+<table class="my-listing">
+    <tr>
+        <th style="margin-left:2.5em" >Name-----------------</th>
+        <th style="margin-left:2.5em" >Position-------------</th>
+        <th style="margin-left:2.5em" >Mu-------------------</th>
+        <th style="margin-left:2.5em" >Sigma----------------</th>
+        <th style="margin-left:2.5em" >Winning Percentage---</th>
+        <th style="margin-left:2.5em" >Goal Average</th>
+    </tr>
+    {% for item in players %}
+    <tr> 
+        <td class="column-{{ item.nickname|slugify }}" >{{ item.nickname }}</td>
+        <td class="column-{{ item.position|slugify }}" >{{ item.position }}</td>
+        <td class="column-{{ item.mu|slugify }}" >{{ item.mu }}</td>
+        <td class="column-{{ item.sigma|slugify }}" >{{ item.sigma }}</td>
+        <td class="column-{{ item.winnerPercentage|slugify }}" >{{ item.winnerPercentage }}</td>
+        <td class="column-{{ item.goalAverage|slugify }}" >{{ item.goalAverage }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+
+</ul>
+
+</div>
+
+{% endblock %}

@@ -1,6 +1,6 @@
 from trueskill_lib import *
 from json_import import extract
-
+from trueskill.games_filtering_functions import get_this_months_games
 
 def get_rating(last_month_flag = False):
     games = extract()
