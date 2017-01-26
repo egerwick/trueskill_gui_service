@@ -1,0 +1,10 @@
+/* Default width of the column */
+ .my-listing td,
+ .my-listing th {
+      width: 10%;
+ }
+
+ /* Width of one specific column */
+ .column-id {
+       width: 10%;
+ }     

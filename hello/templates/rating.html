@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'my-listing.css' %}" />
+
 
 {% block content %}
   <div class="container">
@@ -15,23 +17,23 @@
 {% endfor %}
 
 
-<table>
+<table class="my-listing">
     <tr>
         <th>Name</th>
         <th>Position</th>
-        <th>Sigma</th>
         <th>Mu</th>
+        <th>Sigma</th>
         <th>Winning Percentage</th>
         <th>Goal Average</th>
     </tr>
     {% for item in players %}
     <tr> 
-        <td>{{ item.nickname }}</td>
-        <td>{{ item.position }}</td>
-        <td>{{ item.sigma }}</td>
-        <td>{{ item.mu }}</td>
-        <td>{{ item.winnerPercentage }}</td>
-        <td>{{ item.goalAverage }}</td>
+        <td class="column-{{ item.nickname|slugify }}" >{{ item.nickname }}</td>
+        <td class="column-{{ item.position|slugify }}" >{{ item.position }}</td>
+        <td class="column-{{ item.mu|slugify }}" >{{ item.mu }}</td>
+        <td class="column-{{ item.sigma|slugify }}" >{{ item.sigma }}</td>
+        <td class="column-{{ item.winnerPercentage|slugify }}" >{{ item.winnerPercentage }}</td>
+        <td class="column-{{ item.goalAverage|slugify }}" >{{ item.goalAverage }}</td>
     </tr>
     {% endfor %}
 </table>
