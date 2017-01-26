@@ -54,6 +54,7 @@ class RatingList(APIView):
             ptmp = Player()
             ptmp.nickname = player['name']
             ptmp.position = player['position']
+            ptmp.skill = player['skill']
             ptmp.mu = player['mu']
             ptmp.sigma = player['sigma']
             ptmp.winnerPercentage = player["winnerPercentage"]
@@ -70,6 +71,7 @@ class LastMonthRatingList(APIView):
             ptmp = Player()
             ptmp.nickname = player['name']
             ptmp.position = player['position']
+            ptmp.skill = player['skill']
             ptmp.mu = player['mu']
             ptmp.sigma = player['sigma']
             ptmp.winnerPercentage = player["winnerPercentage"]

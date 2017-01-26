@@ -12,23 +12,25 @@
 
 <ul>
 
-<table class="my-listing">
+<table>
     <tr>
-        <th style="margin-left:2.5em" >Name-----------------</th>
-        <th style="margin-left:2.5em" >Position-------------</th>
-        <th style="margin-left:2.5em" >Mu-------------------</th>
-        <th style="margin-left:2.5em" >Sigma----------------</th>
-        <th style="margin-left:2.5em" >Winning Percentage---</th>
-        <th style="margin-left:2.5em" >Goal Average</th>
+        <th  >Name-----------------</th>
+        <th  >Position-------------</th>
+        <th  >Skill-(mu-3*sig)-----</th>
+        <th  >Mu-------------------</th>
+        <th  >Sigma----------------</th>
+        <th  >Winning Percentage---</th>
+        <th  >Goal Average</th>
     </tr>
     {% for item in players %}
     <tr> 
-        <td class="column-{{ item.nickname|slugify }}" >{{ item.nickname }}</td>
-        <td class="column-{{ item.position|slugify }}" >{{ item.position }}</td>
-        <td class="column-{{ item.mu|slugify }}" >{{ item.mu }}</td>
-        <td class="column-{{ item.sigma|slugify }}" >{{ item.sigma }}</td>
-        <td class="column-{{ item.winnerPercentage|slugify }}" >{{ item.winnerPercentage }}</td>
-        <td class="column-{{ item.goalAverage|slugify }}" >{{ item.goalAverage }}</td>
+        <td >{{ item.nickname }}</td>
+        <td >{{ item.position }}</td>
+        <td >{{ item.mu }}</td>
+        <td >{{ item.mu }}</td>
+        <td >{{ item.sigma }}</td>
+        <td >{{ item.winnerPercentage }}</td>
+        <td >{{ item.goalAverage }}</td>
     </tr>
     {% endfor %}
 </table>

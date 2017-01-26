@@ -9,6 +9,7 @@ class Player(models.Model):
     id = models.IntegerField(primary_key=True)
     nickname = models.CharField(max_length=100, blank=True, default='')
     position = models.CharField(max_length=100, blank=True, default='')
+    skill = models.FloatField(default = 25.0)
     mu = models.FloatField(default = 25.0)
     sigma = models.FloatField(default = 8.33333)
     winnerPercentage = models.FloatField(default = 0)

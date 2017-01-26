@@ -192,13 +192,15 @@ def print_games(f_games, name1=None, name2=None):
 def encode_json(data):
     print json.dumps(data)
 
-def player_ranking_to_json(f_list_players, f_min_number_games):
+def player_ranking_to_json(f_list_players, f_min_number_games, last_month = False):
     total_games = 0
     tmp_data = []
     f_list_players.sort(key=lambda player: player.rating.mu, reverse=True)
+    if last_month:
+        f_list_players.sort(key=lambda player: player.rating.skill, reverse=True)
     for p in f_list_players:
         total_games = total_games + float(p.ngame)
         if(p.ngame > f_min_number_games):
-            p_tmp = {"name": p.name,"position": p.position ,"mu": p.rating.mu, "sigma": p.rating.sigma, "winnerPercentage": float(p.won) / float(p.ngame), "goalAverage":float(p.goals) / float(p.ngame)}
+            p_tmp = {"name": p.name,"position": p.position ,"skill": p.rating.skill,"mu": p.rating.mu, "sigma": p.rating.sigma, "winnerPercentage": float(p.won) / float(p.ngame), "goalAverage":float(p.goals) / float(p.ngame)}
             tmp_data.append(p_tmp)
     return tmp_data
