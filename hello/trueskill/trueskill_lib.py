@@ -197,7 +197,7 @@ def player_ranking_to_json(f_list_players, f_min_number_games, last_month = Fals
     tmp_data = []
     f_list_players.sort(key=lambda player: player.rating.mu, reverse=True)
     if last_month:
-        f_list_players.sort(key=lambda player: player.rating.skill, reverse=True)
+        f_list_players.sort(key=lambda player: player.skill, reverse=True)
     for p in f_list_players:
         total_games = total_games + float(p.ngame)
         if(p.ngame > f_min_number_games):
