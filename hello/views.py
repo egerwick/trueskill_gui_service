@@ -7,8 +7,8 @@ from rest_framework.decorators import api_view
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from models import Game, GamePerformance, Player, Greeting, RatingList
-from serializers import GameSerializer, GamePerformanceSerializer, PlayerSerializer, RatingListSerializer
+from models import Game, GamePerformance, Player, Greeting, RatingList, LastMonthRatingList
+from serializers import GameSerializer, GamePerformanceSerializer, PlayerSerializer, RatingListSerializer, LastMonthRatingListSerializer
 from django.utils.six import BytesIO
 from trueskill.one_game_update import get_rating
 from trueskill.efficient_scraping import scrape_games
@@ -49,6 +49,22 @@ class RatingList(APIView):
     def get(self, request, format=None):
         scrape_games()
         new_rating = get_rating()
+        players = []
+        for player in new_rating:
+            ptmp = Player()
+            ptmp.nickname = player['name']
+            ptmp.position = player['position']
+            ptmp.mu = player['mu']
+            ptmp.sigma = player['sigma']
+            ptmp.winnerPercentage = player["winnerPercentage"]
+            ptmp.goalAverage = player["goalAverage"]
+            players.append(ptmp)
+        return render(request, 'rating.html', {'players': players})
+
+class LastMonthRatingList(APIView):
+    def get(self, request, format=None):
+        scrape_games()
+        new_rating = get_rating(True)
         players = []
         for player in new_rating:
             ptmp = Player()

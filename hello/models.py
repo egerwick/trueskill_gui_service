@@ -33,3 +33,7 @@ class Game(models.Model):
 class RatingList(models.Model):
     players = models.ForeignKey(Player)
     timestamp = models.CharField(max_length=100, blank=True, default='')
+
+class LastMonthRatingList(models.Model):
+    players = models.ForeignKey(Player)
+    timestamp = models.CharField(max_length=100, blank=True, default='')

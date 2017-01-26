@@ -29,3 +29,10 @@ class RatingListSerializer(serializers.ModelSerializer):
     class Meta:
         model = RatingList
         fields = ('timestamp')
+
+class LastMonthRatingListSerializer(serializers.ModelSerializer):
+    players = PlayerSerializer()
+
+    class Meta:
+        model = LastMonthRatingList
+        fields = ('timestamp')
