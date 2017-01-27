@@ -5,7 +5,6 @@ def get_this_months_games(games):
     this_month = time.strftime("%Y-%m")
     for game in games:
         sub_date = game[8][0:7]
-        print sub_date, this_month
         if sub_date == this_month:
             ngames.append(game)
     return ngames 
