@@ -1,10 +1,10 @@
 import json
 
-
 def extract():
     games = []
     #make path environment variable
-    with open('/app/hello/trueskill/all_games.json') as data_file:
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    with open(dir_path+'/all_games.json') as data_file:
         data = json.load(data_file)
 
     for item in data:

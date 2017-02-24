@@ -1,4 +1,5 @@
 import urllib2
+import os
 
 def scrape_games():
     #Make path an environement variable
@@ -6,6 +7,7 @@ def scrape_games():
     req = urllib2.Request(url)
     response = urllib2.urlopen(req)
     the_page = response.read()
-    with open('/app/hello/trueskill/all_games.json','w') as file_:
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    with open(dir_path+'/all_games.json','w') as file_:
         file_.write(the_page)
     return
