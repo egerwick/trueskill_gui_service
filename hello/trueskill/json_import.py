@@ -3,6 +3,7 @@ import json
 
 def extract():
     games = []
+    #make path environment variable
     with open('/app/hello/trueskill/all_games.json') as data_file:
         data = json.load(data_file)
 

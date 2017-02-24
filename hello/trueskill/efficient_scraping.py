@@ -1,6 +1,7 @@
 import urllib2
 
 def scrape_games():
+    #Make path an environement variable
     url = 'https://kickerlytics.herokuapp.com/api/games'
     req = urllib2.Request(url)
     response = urllib2.urlopen(req)

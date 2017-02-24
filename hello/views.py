@@ -14,6 +14,20 @@ from trueskill.one_game_update import get_rating
 from trueskill.efficient_scraping import scrape_games
 from rest_framework.renderers import JSONRenderer
 
+def convert_to_player_model(new_rating):
+    ps_tmp = []
+    for player in new_rating:
+        ptmp = Player()
+        ptmp.nickname = player['name']
+        ptmp.position = player['position']
+        ptmp.skill = player['skill']
+        ptmp.mu = player['mu']
+        ptmp.sigma = player['sigma']
+        ptmp.winnerPercentage = player["winnerPercentage"]
+        ptmp.goalAverage = player["goalAverage"]
+        ps_tmp.append(ptmp)
+    return ps_tmp
+
 # Create your views here.
 class PlayerList(APIView):
     def get(self, request, format=None):
@@ -49,41 +63,18 @@ class RatingList(APIView):
     def get(self, request, format=None):
         scrape_games()
         new_rating = get_rating()
-        players = []
-        for player in new_rating:
-            ptmp = Player()
-            ptmp.nickname = player['name']
-            ptmp.position = player['position']
-            ptmp.skill = player['skill']
-            ptmp.mu = player['mu']
-            ptmp.sigma = player['sigma']
-            ptmp.winnerPercentage = player["winnerPercentage"]
-            ptmp.goalAverage = player["goalAverage"]
-            players.append(ptmp)
+        players = convert_to_player_model(new_rating)
         return render(request, 'rating.html', {'players': players})
 
 class LastMonthRatingList(APIView):
     def get(self, request, format=None):
         scrape_games()
         new_rating = get_rating(True)
-        players = []
-        for player in new_rating:
-            ptmp = Player()
-            ptmp.nickname = player['name']
-            ptmp.position = player['position']
-            ptmp.skill = player['skill']
-            ptmp.mu = player['mu']
-            ptmp.sigma = player['sigma']
-            ptmp.winnerPercentage = player["winnerPercentage"]
-            ptmp.goalAverage = player["goalAverage"]
-            players.append(ptmp)
+        players = convert_to_player_model(new_rating)
         return render(request, 'ratingMonth.html', {'players': players})
 
 def db(request):
     greeting = Greeting()
     greeting.save()
     greetings = Greeting.objects.all()
-    #get all of the games
-    #update the ratings
-    #display the rating list
     return render(request, 'db.html', {'greetings': greetings})
