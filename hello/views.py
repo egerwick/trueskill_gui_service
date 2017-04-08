@@ -1,5 +1,6 @@
 import requests
 import os
+import time
 from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import viewsets, status, generics
@@ -13,6 +14,10 @@ from django.utils.six import BytesIO
 from trueskill.one_game_update import get_rating
 from trueskill.efficient_scraping import scrape_games
 from rest_framework.renderers import JSONRenderer
+
+def get_current_month():
+    return time.strftime("%B %Y")
+        
 
 def convert_to_player_model(new_rating):
     ps_tmp = []
@@ -71,7 +76,8 @@ class LastMonthRatingList(APIView):
         scrape_games()
         new_rating = get_rating(True)
         players = convert_to_player_model(new_rating)
-        return render(request, 'ratingMonth.html', {'players': players})
+        month = get_current_month()
+        return render(request, 'test_temp.html', {'players': players,'month': month})
 
 def db(request):
     greeting = Greeting()

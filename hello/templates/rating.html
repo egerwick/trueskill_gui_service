@@ -1,42 +1,56 @@
-{% extends "base.html" %}
-{% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'my-listing.css' %}" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Trueskill Last Month</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+</head>
+<body>
 
 
-{% block content %}
-  <div class="container">
+<div class="container">
+  <div class="jumbotron">
+    <h1>DAI CST Overall Trueskill Rankings</h1> 
+    <p>Based on an application of the Microsoft Trueskill Algorithm to the data provided by the Daimler 
+      <a href="https://kickerlytics.herokuapp.com/">CST Kickerlytics App.</a></p> 
+  </div>
+  <p> Minimum of 20 games required to appear in ranking </p> 
+</div>
 
-
-<h2>Overall Rankings (min 20 Games)</h2>
-
-
-<ul>
-
-<table class="my-listing">
-    <tr>
-        <th >Name-----------------</th>
-        <th >Position-------------</th>
-        <th >Mu-------------------</th>
-        <th >Sigma----------------</th>
-        <th >Winning Percentage---</th>
-        <th >Goal Average</th>
-    </tr>
+<div class="container">
+  <table class="table table-condensed table-hover">
+    <thead>
+      <tr>
+        <th>Nickname</th>
+        <th>Position</th>
+        <th>Skill \( (\mu - 3 \sigma) \)</th>
+        <th>Central value for rating \( (\mu) \)</th>
+        <th>Uncertainty in rating \( (\sigma) \)</th>
+        <th>Winning Percentage</th>
+        <th>Goal Average</th>
+      </tr>
+    </thead>
+    <tbody>
     {% for item in players %}
     <tr> 
         <td >{{ item.nickname }}</td>
         <td >{{ item.position }}</td>
+        <td >{{ item.skill }}</td>
         <td >{{ item.mu }}</td>
         <td >{{ item.sigma }}</td>
         <td >{{ item.winnerPercentage }}</td>
         <td >{{ item.goalAverage }}</td>
     </tr>
     {% endfor %}
-</table>
-
-
-
-</ul>
-
+    </tbody>
+  </table>
 </div>
 
-{% endblock %}
+</body>
+</html>
