@@ -42,3 +42,47 @@ or
 For more information about using Python on Heroku, see these Dev Center articles:
 
 - [Python on Heroku](https://devcenter.heroku.com/categories/python)
+
+
+App under:
+https://trueskill-service.herokuapp.com/games/
+
+
+To redeploy cleanly need to reset database
+
+heroku pg:reset DATABASE
+
+The make the migrations 
+python manage.py makemigrations
+
+
+Then commit 
+
+git add .
+git commit -m ""
+git push heroku master
+
+heroku run python manage.py migrate
+
+App should then respond to 
+
+curl -H "Content-Type: application/json" -X POST -d @test_data.json https://trueskill-service.herokuapp.com/games/ -u trueskilluser:password123
+
+with appropriate test_data.json file
+
+If a new user identity is needed then 
+
+heroku run python manage.py createsuperuser
+	
+
+
+Run the App locally
+
+heroku local
+
+and then consume service
+
+curl -H "Content-Type: application/json" -X POST -d @test_data.json http://localhost:5000 -u user:password123	
+
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET https://trueskill-service.herokuapp.com/players/?format=json -u trueskilluser:password123
