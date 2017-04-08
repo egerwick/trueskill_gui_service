@@ -15,6 +15,7 @@ from trueskill.one_game_update import get_rating
 from trueskill.efficient_scraping import scrape_games
 from rest_framework.renderers import JSONRenderer
 
+
 def get_current_month():
     return time.strftime("%B %Y")
         
@@ -25,11 +26,11 @@ def convert_to_player_model(new_rating):
         ptmp = Player()
         ptmp.nickname = player['name']
         ptmp.position = player['position']
-        ptmp.skill = player['skill']
-        ptmp.mu = player['mu']
-        ptmp.sigma = player['sigma']
-        ptmp.winnerPercentage = player["winnerPercentage"]
-        ptmp.goalAverage = player["goalAverage"]
+        ptmp.skill = "%.2f" % round(player['skill'],2)
+        ptmp.mu = "%.2f" % round(player['mu'],2)
+        ptmp.sigma = "%.2f" % round(player['sigma'],2)
+        ptmp.winnerPercentage = "%.2f" % round(player['winnerPercentage'],2)
+        ptmp.goalAverage = "%.2f" % round(player['goalAverage'],2)
         ps_tmp.append(ptmp)
     return ps_tmp
 
