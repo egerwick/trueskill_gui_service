@@ -77,7 +77,7 @@ class LastMonthRatingList(APIView):
         new_rating = get_rating(True)
         players = convert_to_player_model(new_rating)
         month = get_current_month()
-        return render(request, 'test_temp.html', {'players': players,'month': month})
+        return render(request, 'ratingMonth.html', {'players': players,'month': month})
 
 def db(request):
     greeting = Greeting()
