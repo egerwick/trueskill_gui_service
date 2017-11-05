@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^games/$', hello.views.GameList.as_view()),
     url(r'^players/$', hello.views.PlayerList.as_view()),
     url(r'^ratings/$', hello.views.RatingList.as_view()),
-    url(r'^ratings_last_month/$', hello.views.LastMonthRatingList.as_view())
+    url(r'^ratings_last_month/$', hello.views.LastMonthRatingList.as_view(), name="last"),
+    url(r'^ratings_previous_month/$', hello.views.PreviousMonthRatingList.as_view(), name="previous")
 ]

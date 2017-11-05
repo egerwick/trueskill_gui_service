@@ -16,9 +16,24 @@ from trueskill.efficient_scraping import scrape_games
 from rest_framework.renderers import JSONRenderer
 
 
+
 def get_current_month():
-    return time.strftime("%B %Y")
+    return time.strftime("%Y-%m")
+
+def get_previous_month():
+    cm = time.strftime("%Y-%m")
+    last_month = str(int(cm[5:7]) - 1)
+    cm = cm[0:5]+last_month
+    return cm
         
+def get_text_month():
+    return time.strftime("%B %Y")
+
+def get_ptext_month():
+    m = get_previous_month()
+    m = m[5:7]
+    return m
+
 
 def convert_to_player_model(new_rating):
     ps_tmp = []
@@ -75,10 +90,21 @@ class RatingList(APIView):
 class LastMonthRatingList(APIView):
     def get(self, request, format=None):
         scrape_games()
-        new_rating = get_rating(True)
-        players = convert_to_player_model(new_rating)
         month = get_current_month()
-        return render(request, 'ratingMonth.html', {'players': players,'month': month})
+        new_rating = get_rating(True, month)
+        players = convert_to_player_model(new_rating)
+        pm = get_previous_month()
+        text_month = get_text_month()
+        return render(request, 'ratingMonth.html', {'players': players,'month': text_month})
+
+class PreviousMonthRatingList(APIView):
+    def get(self, request, format=None):
+        scrape_games()
+        month = get_previous_month()
+        new_rating = get_rating(True, month)
+        players = convert_to_player_model(new_rating)
+        text_month = get_ptext_month()
+        return render(request, 'ratingMonth.html', {'players': players,'month': text_month})
 
 def db(request):
     greeting = Greeting()
