@@ -89,8 +89,10 @@ class RatingList(APIView):
 
 class LastMonthRatingList(APIView):
     def get(self, request, format=None):
+        #get all games from Kickerlytics
         scrape_games()
         month = get_current_month()
+        #call the trueskill backend
         new_rating = get_rating(True, month)
         players = convert_to_player_model(new_rating)
         pm = get_previous_month()
@@ -98,13 +100,18 @@ class LastMonthRatingList(APIView):
         return render(request, 'ratingMonth.html', {'players': players,'month': text_month})
 
 class PreviousMonthRatingList(APIView):
-    def get(self, request, format=None):
+    def get(self, request, format=None, **kwargs):
+        #get month count from the URL
+        month_from_fe = self.kwargs['month_count'] 
+        #get all games from Kickerlytics
         scrape_games()
+        #get previous month
         month = get_previous_month()
         new_rating = get_rating(True, month)
         players = convert_to_player_model(new_rating)
         text_month = get_ptext_month()
         return render(request, 'ratingMonth.html', {'players': players,'month': text_month})
+
 
 def db(request):
     greeting = Greeting()

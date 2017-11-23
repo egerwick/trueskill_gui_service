@@ -192,7 +192,7 @@ def print_games(f_games, name1=None, name2=None):
 def encode_json(data):
     print json.dumps(data)
 
-def player_ranking_to_json(f_list_players, f_min_number_games, last_month = False):
+def json_player_ranking(f_list_players, f_min_number_games, last_month = False):
     total_games = 0
     tmp_data = []
     f_list_players.sort(key=lambda player: player.rating.mu, reverse=True)
