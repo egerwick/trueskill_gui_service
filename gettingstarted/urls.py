@@ -2,7 +2,6 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework import routers
-
 admin.autodiscover()
 
 import hello.views
@@ -23,6 +22,8 @@ urlpatterns = [
     url(r'^games/$', hello.views.GameList.as_view()),
     url(r'^players/$', hello.views.PlayerList.as_view()),
     url(r'^ratings/$', hello.views.RatingList.as_view()),
-    url(r'^ratings_last_month/$', hello.views.LastMonthRatingList.as_view(), name="last"),
-    url(r'^ratings_last_month/(?P<month_count>[0-9]+)', hello.views.PreviousMonthRatingList.as_view(), name="previous")
+    url(r'^ratings_last_month/$', hello.views.PreviousMonthRatingList.as_view(), name="old"),
+    url(r'^ratings_last_month/(?P<month_count>[0]+)', hello.views.PreviousMonthRatingList.as_view(), name="current"),
+    url(r'^ratings_last_month/(?P<month_count>[1-9]{1})', hello.views.PreviousMonthRatingList.as_view(), name="previous"),
+    url(r'^ratings_last_month/(?P<month_count>[1-9]{2})', hello.views.PreviousMonthRatingList.as_view(), name="previous")
 ]

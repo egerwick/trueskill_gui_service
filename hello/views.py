@@ -17,23 +17,18 @@ from rest_framework.renderers import JSONRenderer
 
 
 
-def get_current_month():
-    return time.strftime("%Y-%m")
-
-def get_previous_month():
+def get_current_month(month_from_fe):
     cm = time.strftime("%Y-%m")
-    last_month = str(int(cm[5:7]) - 1)
+    print int(cm[5:7]), ":", int(month_from_fe)
+    last_month = str((int(cm[5:7]) - int(month_from_fe))%12)
+    print last_month, 'here'
+    if len(last_month) == 1:
+         last_month = '0'+last_month
     cm = cm[0:5]+last_month
     return cm
         
 def get_text_month():
     return time.strftime("%B %Y")
-
-def get_ptext_month():
-    m = get_previous_month()
-    m = m[5:7]
-    return m
-
 
 def convert_to_player_model(new_rating):
     ps_tmp = []
@@ -87,30 +82,19 @@ class RatingList(APIView):
         players = convert_to_player_model(new_rating)
         return render(request, 'rating.html', {'players': players})
 
-class LastMonthRatingList(APIView):
-    def get(self, request, format=None):
-        #get all games from Kickerlytics
-        scrape_games()
-        month = get_current_month()
-        #call the trueskill backend
-        new_rating = get_rating(True, month)
-        players = convert_to_player_model(new_rating)
-        pm = get_previous_month()
-        text_month = get_text_month()
-        return render(request, 'ratingMonth.html', {'players': players,'month': text_month})
-
 class PreviousMonthRatingList(APIView):
-    def get(self, request, format=None, **kwargs):
-        #get month count from the URL
-        month_from_fe = self.kwargs['month_count'] 
-        #get all games from Kickerlytics
-        scrape_games()
-        #get previous month
-        month = get_previous_month()
-        new_rating = get_rating(True, month)
+    def get(self, request, format=None, month_count = "0", **kwargs):
+        ### get month count from the URL
+        month_from_fe = month_count 
+        ###get all games from Kickerlytics
+        #scrape_games()
+        ### get the display month from current-month and month_from_fe
+        ### TODO: get the year counter working
+        display_month = get_current_month(month_from_fe) 
+        print display_month
+        new_rating = get_rating(True, display_month)
         players = convert_to_player_model(new_rating)
-        text_month = get_ptext_month()
-        return render(request, 'ratingMonth.html', {'players': players,'month': text_month})
+        return render(request, 'ratingMonth.html', {'players': players,'month': display_month})
 
 
 def db(request):
